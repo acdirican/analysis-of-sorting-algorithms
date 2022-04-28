@@ -11,8 +11,8 @@ import java.util.function.Consumer;
 public enum SortingAlgorithm {
 	BUBLESORT("Bubble Sort", Simple::bubbleSort),
 	INSERTIONSORT("Insertion Sort", Simple::insertionSort),
-	MERGESORT("Merge Sort", MergeSort::sort),
 	SELECTIONSORT("Selection Srot", Simple::selectionSort),
+	MERGESORT("Merge Sort", MergeSort::sort),
 	QUICKSORT("Quick Sort", QuickSort::sort),;
 
 	private final String name;

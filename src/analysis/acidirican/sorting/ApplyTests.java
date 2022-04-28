@@ -2,6 +2,7 @@ package analysis.acidirican.sorting;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Scanner;
 
 import analysis.acdirican.sorting.algorithms.Others;
 import analysis.acdirican.sorting.algorithms.SortingAlgorithm;
@@ -17,12 +18,18 @@ import analysis.acdirican.sorting.tests.RuntimeTest;
  */
 public class ApplyTests {
 	
-	/*
-	 * Settings:
+	/**
+	 * The start index of {@link TestData.TEST_SIZES}
 	 */
 	private static final int start = 0;
+	/**
+	 * The finish index of {@link TestData.TEST_SIZES}
+	 */
 	private static final int finish = 5;
-	private static final int testRepetitionCount = 1;
+	/**
+	 * The number of repetition of tests
+	 */
+	private static final int testRepetitionCount = 20;
 	
 	/*
 	 *Object for command-line progress feedback 
@@ -30,8 +37,14 @@ public class ApplyTests {
 	private static Progress progressSignaler;
 	
 	public static void main(String[] args) throws IOException {
-		//Comment it after you run the first time.
-		TestData.create();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Would you like to recreate the test data [yes/no]?");
+		String ans = sc.nextLine();
+		
+		if (ans.equalsIgnoreCase("yes") || ans.equalsIgnoreCase("y")){
+			TestData.create();
+		}
+		
 		
 		test(TestData.BEST_CASE);
 		test(TestData.AVERAGE_CASE);
@@ -42,7 +55,7 @@ public class ApplyTests {
 
 		RuntimeTest.debug(false);
 		
-		startProgress("** Test:" + TestData.getTestName(test_case));
+		startProgress("** Test:" + TestData.getTestName(test_case) + " x " + testRepetitionCount + "");
 		double[][] results = RuntimeTest.apply(start, finish, test_case,testRepetitionCount);
 		stopProgress("Completed.");
        	print(start, finish,test_case, results);
